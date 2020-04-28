@@ -1,0 +1,4 @@
+package processor
+
+interface ModelInterface {
+}
