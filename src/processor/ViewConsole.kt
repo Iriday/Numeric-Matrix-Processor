@@ -50,7 +50,7 @@ class ViewConsole : ViewInterface {
                         val a = readMatrixFromConsole()
                         println("Enter scalar:")
                         val scalar = readLine()!!.trim().toInt()
-                        throw NotImplementedError() // temp
+                        controller.matrixScalarMultiplication(a, scalar)
                     }
                     "5" -> {
                         println("Enter matrix:")
