@@ -10,7 +10,7 @@ class Controller(private val model: ModelInterface, private val view: ViewInterf
         view.run()
     }
 
-    override fun process(a: Array<Array<Int>>, b: Array<Array<Int>>, operation: MatrixOperation): Array<Array<Int>> {
-        return model.process(a, b, operation)
+   override fun matrixAddition(a: Array<Array<Int>>, b: Array<Array<Int>>): Array<Array<Int>> {
+        return model.matrixAddition(a, b)
     }
 }

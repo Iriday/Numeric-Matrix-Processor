@@ -1,7 +1,5 @@
 package processor
 
-import processor.MatrixOperation.*
-
 class ViewConsole : ViewInterface {
     private lateinit var controller: Controller
 
@@ -14,47 +12,55 @@ class ViewConsole : ViewInterface {
     }
 
     private fun menuMain() {
-        var operation: MatrixOperation
         mainMenu@ while (true) {
             print(
                 """Choose operation
             |1. Addition
             |2. Subtraction
-            |3. Scalar multiplication
-            |4. Multiplication
+            |3. Multiplication
+            |4. Scalar multiplication
             |5. Transposition
             |0. Exit
             |""".trimMargin()
             )
             try {
-                val option = readLine()!!.toInt()
-                if (option == 0) break
-                operation = MatrixOperation.values()[option - 1]
+                val option = readLine()!!.trim()
                 println()
 
-                val result = when (operation) {
-                    ADDITION, SUBTRACTION, MULTIPLICATION -> {
+                val result = when (option) {
+                    "1", "2", "3" -> {
                         println("Enter matrices:")
                         val r: Array<Array<Int>>
                         try {
-                            r = controller.process(readMatrixFromConsole(), readMatrixFromConsole(), operation)
+                            val a = readMatrixFromConsole()
+                            val b = readMatrixFromConsole()
+                            r = when (option) {
+                                "1" -> controller.matrixAddition(a, b)
+                                "2", "3" -> throw NotImplementedError()
+                                else -> throw IllegalArgumentException("Something went wrong")
+                            }
                         } catch (e: IncompatibleMatricesException) {
                             println("\nError, incompatible matrices\n")
                             continue@mainMenu
                         }
                         r
                     }
-                    SCALAR_MULTIPLICATION -> {
+                    "4" -> {
                         println("Enter matrix:")
                         val a = readMatrixFromConsole()
                         println("Enter scalar:")
                         val scalar = readLine()!!.trim().toInt()
                         throw NotImplementedError() // temp
                     }
-                    TRANSPOSITION -> {
+                    "5" -> {
                         println("Enter matrix:")
                         val a = readMatrixFromConsole()
                         throw NotImplementedError() // temp
+                    }
+                    "0" -> break@mainMenu
+                    else -> {
+                        println("Incorrect input, please try again\n")
+                        continue@mainMenu
                     }
                 }
                 println()

@@ -1,15 +1,9 @@
 package processor
 
-import processor.MatrixOperation.*
 
 class Model : ModelInterface {
-    override fun process(a: Array<Array<Int>>, b: Array<Array<Int>>, operation: MatrixOperation): Array<Array<Int>> {
-        return when (operation) {
-            ADDITION -> {
-                matrixAddition(a, b)
-            }
-            else -> throw NotImplementedError()
-        }
+    override fun matrixAddition(a: Array<Array<Int>>, b: Array<Array<Int>>): Array<Array<Int>> {
+        return processor.matrixAddition(a, b)
     }
 }
 

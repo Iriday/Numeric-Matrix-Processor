@@ -1,5 +1,0 @@
-package processor
-
-enum class MatrixOperation {
-    ADDITION, SUBTRACTION, SCALAR_MULTIPLICATION, MULTIPLICATION, TRANSPOSITION
-}
