@@ -15,7 +15,7 @@ class ViewConsole : ViewInterface {
 
     private fun menuMain() {
         var operation: MatrixOperation
-        while (true) {
+        mainMenu@ while (true) {
             print(
                 """Choose operation
             |1. Addition
@@ -31,33 +31,39 @@ class ViewConsole : ViewInterface {
                 if (option == 0) break
                 operation = MatrixOperation.values()[option - 1]
                 println()
+
                 val result = when (operation) {
                     ADDITION, SUBTRACTION, MULTIPLICATION -> {
                         println("Enter matrices:")
-                        val a = readMatrixFromConsole()
-                        val b = readMatrixFromConsole()
-                        arrayOf(arrayOf(0, 1, 0)) // temp
+                        val r: Array<Array<Int>>
+                        try {
+                            r = controller.process(readMatrixFromConsole(), readMatrixFromConsole(), operation)
+                        } catch (e: IncompatibleMatricesException) {
+                            println("\nError, incompatible matrices\n")
+                            continue@mainMenu
+                        }
+                        r
                     }
                     SCALAR_MULTIPLICATION -> {
                         println("Enter matrix:")
                         val a = readMatrixFromConsole()
                         println("Enter scalar:")
                         val scalar = readLine()!!.trim().toInt()
-                        arrayOf(arrayOf(0, 1, 0)) // temp
+                        throw NotImplementedError() // temp
                     }
                     TRANSPOSITION -> {
                         println("Enter matrix:")
                         val a = readMatrixFromConsole()
-                        arrayOf(arrayOf(0, 1, 0)) // temp
+                        throw NotImplementedError() // temp
                     }
                 }
                 println()
                 printMatrix(result)
                 println()
-
-            } catch (e: Exception) {
+            } catch (e: NotImplementedError) {
+                println("\nOperation not implemented\n")
+            } catch (e: NumberFormatException) {
                 println("\nIncorrect input, please try again\n")
-                continue
             }
         }
     }
