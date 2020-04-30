@@ -1,5 +1,7 @@
 package processor
 
+import java.math.BigDecimal
+
 class ViewConsole : ViewInterface {
     private lateinit var controller: Controller
 
@@ -30,7 +32,7 @@ class ViewConsole : ViewInterface {
                 val result = when (option) {
                     "1", "2", "3" -> {
                         println("Enter matrices:")
-                        val r: Array<Array<Int>>
+                        val r: Array<Array<BigDecimal>>
                         try {
                             val a = readMatrixFromConsole()
                             val b = readMatrixFromConsole()
@@ -49,7 +51,7 @@ class ViewConsole : ViewInterface {
                         println("Enter matrix:")
                         val a = readMatrixFromConsole()
                         println("Enter scalar:")
-                        val scalar = readLine()!!.trim().toInt()
+                        val scalar = readLine()!!.trim().toBigDecimal()
                         controller.matrixScalarMultiplication(a, scalar)
                     }
                     "5" -> {
@@ -74,17 +76,17 @@ class ViewConsole : ViewInterface {
         }
     }
 
-    private fun readMatrixFromConsole(): Array<Array<Int>> {
+    private fun readMatrixFromConsole(): Array<Array<BigDecimal>> {
         val sizes = readLine()!!.trim().split(' ').map { value -> value.toInt() }
         if (sizes.size != 2) throw IllegalArgumentException()
         return Array(sizes[0]) {
             readLine()!!.trim().split(' ')
-                .map { value -> value.toInt() }
+                .map { value -> value.toBigDecimal() }
                 .toTypedArray()
         }
     }
 
-    private fun printMatrix(matrix: Array<Array<Int>>) {
+    private fun printMatrix(matrix: Array<Array<BigDecimal>>) {
         for (i in matrix.indices) {
             for (j in matrix[i].indices) {
                 print(matrix[i][j])

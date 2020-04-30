@@ -1,5 +1,7 @@
 package processor
 
+import java.math.BigDecimal
+
 class Controller(private val model: ModelInterface, private val view: ViewInterface) : ControllerInterface {
     init {
         view.initialize(this)
@@ -10,11 +12,11 @@ class Controller(private val model: ModelInterface, private val view: ViewInterf
         view.run()
     }
 
-    override fun matrixAddition(a: Array<Array<Int>>, b: Array<Array<Int>>): Array<Array<Int>> {
+    override fun matrixAddition(a: Array<Array<BigDecimal>>, b: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
         return model.matrixAddition(a, b)
     }
 
-    override fun matrixScalarMultiplication(a: Array<Array<Int>>, scalar: Int): Array<Array<Int>> {
+    override fun matrixScalarMultiplication(a: Array<Array<BigDecimal>>, scalar: BigDecimal): Array<Array<BigDecimal>> {
         return model.matrixScalarMultiplication(a, scalar)
     }
 }
