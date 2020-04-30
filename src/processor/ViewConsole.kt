@@ -38,7 +38,8 @@ class ViewConsole : ViewInterface {
                             val b = readMatrixFromConsole()
                             r = when (option) {
                                 "1" -> controller.matrixAddition(a, b)
-                                "2", "3" -> throw NotImplementedError()
+                                "2" -> throw NotImplementedError()
+                                "3" -> controller.matrixMultiplication(a, b)
                                 else -> throw IllegalArgumentException("Something went wrong")
                             }
                         } catch (e: IncompatibleMatricesException) {

@@ -16,6 +16,10 @@ class Controller(private val model: ModelInterface, private val view: ViewInterf
         return model.matrixAddition(a, b)
     }
 
+    override fun matrixMultiplication(a: Array<Array<BigDecimal>>, b: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
+        return model.matrixMultiplication(a, b)
+    }
+
     override fun matrixScalarMultiplication(a: Array<Array<BigDecimal>>, scalar: BigDecimal): Array<Array<BigDecimal>> {
         return model.matrixScalarMultiplication(a, scalar)
     }
