@@ -40,5 +40,6 @@ fun matrixMultiplication(a: Array<Array<BigDecimal>>, b: Array<Array<BigDecimal>
 }
 
 fun matrixScalarMultiplication(matrix: Array<Array<BigDecimal>>, scalar: BigDecimal): Array<Array<BigDecimal>> {
+    if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
     return matrix.map { row -> row.map { value -> value * scalar }.toTypedArray() }.toTypedArray()
 }
