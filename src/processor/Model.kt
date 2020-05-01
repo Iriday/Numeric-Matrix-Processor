@@ -19,6 +19,10 @@ class Model : ModelInterface {
         return processor.matrixTransMainDiagonal(matrix)
     }
 
+    override fun matrixTransSideDiagonal(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
+        return processor.matrixTransSideDiagonal(matrix)
+    }
+
     override fun matrixTransVerticalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
         return processor.matrixTransVerticalLine(matrix)
     }

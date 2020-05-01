@@ -28,6 +28,10 @@ class Controller(private val model: ModelInterface, private val view: ViewInterf
         return model.matrixTransMainDiagonal(matrix)
     }
 
+    override fun matrixTransSideDiagonal(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
+        return model.matrixTransSideDiagonal(matrix)
+    }
+
     override fun matrixTransVerticalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
         return model.matrixTransVerticalLine(matrix)
     }

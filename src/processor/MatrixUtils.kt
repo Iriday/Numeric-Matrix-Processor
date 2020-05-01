@@ -59,6 +59,19 @@ fun matrixTransMainDiagonal(matrix: Array<Array<BigDecimal>>): Array<Array<BigDe
     return newMatrix
 }
 
+fun matrixTransSideDiagonal(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
+    if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
+    val rows = matrix.size
+    val cols = matrix[0].size
+    val newMatrix = Array(cols) { Array(rows) { BigDecimal.ZERO } }
+    for (i in matrix.indices) {
+        for (j in matrix[i].indices) {
+            newMatrix[cols - 1 - j][rows - 1 - i] = matrix[i][j]
+        }
+    }
+    return newMatrix
+}
+
 fun matrixTransVerticalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
     if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
     val cols = matrix[0].size
