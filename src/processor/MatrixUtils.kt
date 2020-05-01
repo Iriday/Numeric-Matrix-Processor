@@ -60,3 +60,16 @@ fun matrixTransVerticalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDe
     }
     return newMatrix
 }
+
+fun matrixTransHorizontalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
+    if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
+    val rows = matrix.size
+    val newMatrix = Array(rows) { Array(matrix[0].size) { BigDecimal.ZERO } }
+
+    for (i in matrix.indices) {
+        for (j in matrix[i].indices) {
+            newMatrix[i][j] = matrix[rows - 1 - i][j]
+        }
+    }
+    return newMatrix
+}

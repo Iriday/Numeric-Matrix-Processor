@@ -73,8 +73,9 @@ class ViewConsole : ViewInterface {
                         println("Enter matrix:")
                         val matrix = readMatrixFromConsole(size[0], size[1])
                         val result = when (optionTrans) {
-                            "1", "2", "4" -> throw NotImplementedError() // temp
+                            "1", "2" -> throw NotImplementedError() // temp
                             "3" -> controller.matrixTransVerticalLine(matrix)
+                            "4" -> controller.matrixTransHorizontalLine(matrix)
                             else -> throw Exception("Something went wrong")
                         }
                         result

@@ -18,4 +18,8 @@ class Model : ModelInterface {
     override fun matrixTransVerticalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
         return processor.matrixTransVerticalLine(matrix)
     }
+
+    override fun matrixTransHorizontalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
+        return processor.matrixTransHorizontalLine(matrix)
+    }
 }

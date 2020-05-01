@@ -27,4 +27,8 @@ class Controller(private val model: ModelInterface, private val view: ViewInterf
     override fun matrixTransVerticalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
         return model.matrixTransVerticalLine(matrix)
     }
+
+    override fun matrixTransHorizontalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
+        return model.matrixTransHorizontalLine(matrix)
+    }
 }
