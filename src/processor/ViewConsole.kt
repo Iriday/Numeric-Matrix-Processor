@@ -40,7 +40,7 @@ class ViewConsole {
 
                             result = when (option) {
                                 "1" -> matrixAddition(a, b)
-                                "2" -> throw NotImplementedError()
+                                "2" -> matrixSubtraction(a, b)
                                 "3" -> matrixMultiplication(a, b)
                                 else -> throw IllegalArgumentException("Something went wrong")
                             }
@@ -85,8 +85,6 @@ class ViewConsole {
                 println("\nThe ${getOperationName(option)} result is:")
                 printMatrix(result)
                 println()
-            } catch (e: NotImplementedError) {
-                println("\nOperation not implemented\n")
             } catch (e: NumberFormatException) {
                 println("\nIncorrect input, please try again\n")
             } catch (e: IncorrectInputException) {

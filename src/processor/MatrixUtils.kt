@@ -26,6 +26,11 @@ fun matrixAddition(a: Array<Array<BigDecimal>>, b: Array<Array<BigDecimal>>): Ar
     return a.mapIndexed { i, arr -> arr.mapIndexed { j, value -> value + b[i][j] }.toTypedArray() }.toTypedArray()
 }
 
+fun matrixSubtraction(a: Array<Array<BigDecimal>>, b: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
+    if (!isMatricesSizesEqual(a, b)) throw IncompatibleMatricesException()
+    return a.mapIndexed { i, arr -> arr.mapIndexed { j, value -> value - b[i][j] }.toTypedArray() }.toTypedArray()
+}
+
 fun matrixMultiplication(a: Array<Array<BigDecimal>>, b: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
     if (!isMatricesCompatibleForMultiplication(a, b)) throw IncompatibleMatricesException()
     val result = Array<Array<BigDecimal>>(a.size) { Array(b[0].size) { BigDecimal.ZERO } }
