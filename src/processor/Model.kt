@@ -15,6 +15,10 @@ class Model : ModelInterface {
         return processor.matrixScalarMultiplication(a, scalar)
     }
 
+    override fun matrixTransMainDiagonal(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>>{
+        return processor.matrixTransMainDiagonal(matrix)
+    }
+
     override fun matrixTransVerticalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
         return processor.matrixTransVerticalLine(matrix)
     }
