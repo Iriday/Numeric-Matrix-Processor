@@ -2,15 +2,10 @@ package processor
 
 import java.math.BigDecimal
 
-class ViewConsole : ViewInterface {
-    private lateinit var controller: Controller
+class ViewConsole {
     private val regexSplit = Regex("[ ,]+")
 
-    override fun initialize(controller: Controller) {
-        this.controller = controller
-    }
-
-    override fun run() {
+    fun run() {
         menuMain()
     }
 
@@ -44,9 +39,9 @@ class ViewConsole : ViewInterface {
                             val b = readMatrixFromConsole(bSize[0], bSize[1])
 
                             result = when (option) {
-                                "1" -> controller.matrixAddition(a, b)
+                                "1" -> matrixAddition(a, b)
                                 "2" -> throw NotImplementedError()
-                                "3" -> controller.matrixMultiplication(a, b)
+                                "3" -> matrixMultiplication(a, b)
                                 else -> throw IllegalArgumentException("Something went wrong")
                             }
                         } catch (e: IncompatibleMatricesException) {
@@ -62,7 +57,7 @@ class ViewConsole : ViewInterface {
                         val a = readMatrixFromConsole(size[0], size[1])
                         println("Enter scalar:")
                         val scalar = readLine()!!.trim().toBigDecimal()
-                        controller.matrixScalarMultiplication(a, scalar)
+                        matrixScalarMultiplication(a, scalar)
                     }
                     "5" -> {
                         val optionTrans = menuTransposition()
@@ -73,10 +68,10 @@ class ViewConsole : ViewInterface {
                         println("Enter matrix:")
                         val matrix = readMatrixFromConsole(size[0], size[1])
                         val result = when (optionTrans) {
-                            "1" -> controller.matrixTransMainDiagonal(matrix)
-                            "2" -> controller.matrixTransSideDiagonal(matrix)
-                            "3" -> controller.matrixTransVerticalLine(matrix)
-                            "4" -> controller.matrixTransHorizontalLine(matrix)
+                            "1" -> matrixTransMainDiagonal(matrix)
+                            "2" -> matrixTransSideDiagonal(matrix)
+                            "3" -> matrixTransVerticalLine(matrix)
+                            "4" -> matrixTransHorizontalLine(matrix)
                             else -> throw Exception("Something went wrong")
                         }
                         result
