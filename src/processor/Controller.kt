@@ -23,4 +23,8 @@ class Controller(private val model: ModelInterface, private val view: ViewInterf
     override fun matrixScalarMultiplication(a: Array<Array<BigDecimal>>, scalar: BigDecimal): Array<Array<BigDecimal>> {
         return model.matrixScalarMultiplication(a, scalar)
     }
+
+    override fun matrixTransVerticalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
+        return model.matrixTransVerticalLine(matrix)
+    }
 }

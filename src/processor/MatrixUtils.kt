@@ -47,3 +47,16 @@ fun matrixScalarMultiplication(matrix: Array<Array<BigDecimal>>, scalar: BigDeci
     if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
     return matrix.map { row -> row.map { value -> value * scalar }.toTypedArray() }.toTypedArray()
 }
+
+fun matrixTransVerticalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
+    if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
+    val cols = matrix[0].size
+    val newMatrix = Array(matrix.size) { Array(cols) { BigDecimal.ZERO } }
+
+    for (i in matrix.indices) {
+        for (j in matrix[i].indices) {
+            newMatrix[i][j] = matrix[i][cols - 1 - j]
+        }
+    }
+    return newMatrix
+}
