@@ -65,6 +65,9 @@ class ViewConsole : ViewInterface {
                         controller.matrixScalarMultiplication(a, scalar)
                     }
                     "5" -> {
+                        val optionTrans = menuTransposition()
+                        if (optionTrans == "0") continue@mainMenu
+
                         print("Enter size of matrix: ")
                         val size = readMatrixSizeFromConsole()
                         println("Enter matrix:")
@@ -86,6 +89,29 @@ class ViewConsole : ViewInterface {
                 println("\nIncorrect input, please try again\n")
             } catch (e: IncorrectInputException) {
                 println("\nIncorrect input, please try again\n")
+            }
+        }
+    }
+
+    private fun menuTransposition(): String {
+        transMenu@ while (true) {
+            print(
+                """
+            |1. Main diagonal
+            |2. Side diagonal
+            |3. Vertical line
+            |4. Horizontal line
+            |0. Return
+            |Your choice: """.trimMargin()
+            )
+            val option = readLine()!!.trim()
+            println()
+            when (option) {
+                "1", "2", "3", "4", "0" -> return option
+                else -> {
+                    println("Incorrect input, please try again\n")
+                    continue@transMenu
+                }
             }
         }
     }
