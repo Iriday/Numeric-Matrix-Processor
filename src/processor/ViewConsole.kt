@@ -18,6 +18,7 @@ class ViewConsole {
             |3. Multiplication
             |4. Scalar multiplication
             |5. Transposition
+            |6. Determinant
             |0. Exit
             |""".trimMargin()
             )
@@ -76,6 +77,12 @@ class ViewConsole {
                         }
                         result
                     }
+                    "6" -> {
+                        print("Enter size of matrix: ")
+                        val size = readMatrixSizeFromConsole()
+                        println("Enter matrix:")
+                        arrayOf(arrayOf(matrixDeterminant(readMatrixFromConsole(size[0], size[1]))))
+                    }
                     "0" -> break@mainMenu
                     else -> {
                         println("Incorrect input, please try again\n")
@@ -123,6 +130,7 @@ class ViewConsole {
             "3" -> "multiplication"
             "4" -> "scalar multiplication"
             "5" -> "transposition"
+            "6" -> "determinant"
             else -> throw IllegalArgumentException("Something went wrong")
         }
     }
