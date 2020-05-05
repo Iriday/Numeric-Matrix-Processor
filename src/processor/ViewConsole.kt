@@ -19,6 +19,7 @@ class ViewConsole {
             |4. Scalar multiplication
             |5. Transposition
             |6. Determinant
+            |7. Inversion
             |0. Exit
             |""".trimMargin()
             )
@@ -77,11 +78,20 @@ class ViewConsole {
                         }
                         result
                     }
-                    "6" -> {
+                    "6", "7" -> {
                         print("Enter size of matrix: ")
                         val size = readMatrixSizeFromConsole()
                         println("Enter matrix:")
-                        arrayOf(arrayOf(matrixDeterminant(readMatrixFromConsole(size[0], size[1]))))
+                        val matrix = readMatrixFromConsole(size[0], size[1])
+                        when (option) {
+                            "6" -> arrayOf(arrayOf(matrixDeterminant(matrix)))
+                            "7" -> {
+                                val invertedMatrix = matrixInversion(matrix)
+                                if (invertedMatrix.isEmpty()) throw NotInvertibleMatrixException()
+                                else invertedMatrix
+                            }
+                            else -> throw Exception("Something went wrong")
+                        }
                     }
                     "0" -> break@mainMenu
                     else -> {
@@ -96,6 +106,8 @@ class ViewConsole {
                 println("\nIncorrect input, please try again\n")
             } catch (e: IncorrectInputException) {
                 println("\nIncorrect input, please try again\n")
+            } catch (e: NotInvertibleMatrixException) {
+                println("\nMatrix is not invertible\n")
             }
         }
     }
@@ -131,6 +143,7 @@ class ViewConsole {
             "4" -> "scalar multiplication"
             "5" -> "transposition"
             "6" -> "determinant"
+            "7" -> "inversion"
             else -> throw IllegalArgumentException("Something went wrong")
         }
     }
@@ -160,4 +173,5 @@ class ViewConsole {
     }
 
     private class IncorrectInputException : Exception()
+    private class NotInvertibleMatrixException : Exception()
 }
