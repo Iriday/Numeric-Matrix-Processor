@@ -95,7 +95,7 @@ class ViewConsole {
                     }
                 }
                 println("\nThe ${getOperationName(option)} result is:")
-                printMatrix(result)
+                printMatrix(formatMatrix(result, 2))
                 println()
             } catch (e: IllegalArgumentException) {
                 println("\nIncorrect input, please try again\n")
@@ -155,7 +155,7 @@ class ViewConsole {
         return matrix
     }
 
-    private fun printMatrix(matrix: Array<Array<BigDecimal>>) {
+    private fun <T> printMatrix(matrix: Array<Array<T>>) {
         for (i in matrix.indices) {
             for (j in matrix[i].indices) {
                 print(matrix[i][j])

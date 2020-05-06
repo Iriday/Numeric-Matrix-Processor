@@ -3,6 +3,27 @@ package processor
 import java.math.BigDecimal
 import java.math.RoundingMode
 
+fun formatMatrix(matrix: Array<Array<BigDecimal>>, scale: Int): Array<Array<String>> {
+    val scaledMatrix = matrix.map { row -> row.map { value -> value.setScale(scale, RoundingMode.HALF_EVEN).stripTrailingZeros()!! } }
+    val newMatrix = scaledMatrix.map { row -> row.map { it.toString() } }
+
+    val maxStrLenInRow = ArrayList<Int>()
+    for (i in newMatrix[0].indices) {
+        var max = 0
+        for (j in newMatrix.indices) {
+            max = kotlin.math.max(max, newMatrix[j][i].length)
+        }
+        maxStrLenInRow.add(max)
+    }
+
+    return newMatrix.map { row ->
+        var i = -1
+        row.map { value ->
+            String.format("%${maxStrLenInRow[++i]}s", value)
+        }.toTypedArray()
+    }.toTypedArray()
+}
+
 fun isMatrixCorrect(matrix: Array<Array<BigDecimal>>): Boolean {
     if (matrix.isEmpty() || matrix[0].isEmpty()) return false
     val rows = matrix[0].size
