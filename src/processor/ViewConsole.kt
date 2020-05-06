@@ -52,15 +52,6 @@ class ViewConsole {
                         }
                         result
                     }
-                    "4" -> {
-                        print("Enter size of matrix: ")
-                        val size = readMatrixSizeFromConsole()
-                        println("Enter matrix:")
-                        val a = readMatrixFromConsole(size[0], size[1])
-                        println("Enter scalar:")
-                        val scalar = readLine()!!.trim().toBigDecimal()
-                        matrixScalarMultiplication(a, scalar)
-                    }
                     "5" -> {
                         val optionTrans = menuTransposition()
                         if (optionTrans == "0") continue@mainMenu
@@ -78,12 +69,16 @@ class ViewConsole {
                         }
                         result
                     }
-                    "6", "7" -> {
+                    "4", "6", "7" -> {
                         print("Enter size of matrix: ")
                         val size = readMatrixSizeFromConsole()
                         println("Enter matrix:")
                         val matrix = readMatrixFromConsole(size[0], size[1])
                         when (option) {
+                            "4" -> {
+                                println("Enter scalar:")
+                                matrixScalarMultiplication(matrix, readLine()!!.trim().toBigDecimal())
+                            }
                             "6" -> arrayOf(arrayOf(matrixDeterminant(matrix)))
                             "7" -> {
                                 val invertedMatrix = matrixInversion(matrix)
