@@ -97,9 +97,7 @@ class ViewConsole {
                 println("\nThe ${getOperationName(option)} result is:")
                 printMatrix(result)
                 println()
-            } catch (e: NumberFormatException) {
-                println("\nIncorrect input, please try again\n")
-            } catch (e: IncorrectInputException) {
+            } catch (e: IllegalArgumentException) {
                 println("\nIncorrect input, please try again\n")
             } catch (e: NotInvertibleMatrixException) {
                 println("\nMatrix is not invertible\n")
@@ -145,7 +143,7 @@ class ViewConsole {
 
     private fun readMatrixSizeFromConsole(): List<Int> {
         val mSize = readLine()!!.trim(' ', ',').split(regexSplit).map { value -> value.toInt() }
-        return if (mSize.size != 2 || mSize[0] <= 0 || mSize[1] <= 0) throw IncorrectInputException() else mSize
+        return if (mSize.size != 2 || mSize[0] <= 0 || mSize[1] <= 0) throw IllegalArgumentException() else mSize
     }
 
     private fun readMatrixFromConsole(rows: Int, cols: Int): Array<Array<BigDecimal>> {
@@ -153,7 +151,7 @@ class ViewConsole {
         val matrix = Array(rows) {
             readLine()!!.trim(' ', ',').split(regexSplit).map { value -> value.toBigDecimal() }.toTypedArray()
         }
-        if (cols != matrix[0].size || !isMatrixCorrect(matrix)) throw IncorrectInputException()
+        if (cols != matrix[0].size || !isMatrixCorrect(matrix)) throw IllegalArgumentException()
         return matrix
     }
 
@@ -167,6 +165,5 @@ class ViewConsole {
         }
     }
 
-    private class IncorrectInputException : Exception()
     private class NotInvertibleMatrixException : Exception()
 }
