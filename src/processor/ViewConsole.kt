@@ -82,8 +82,10 @@ class ViewConsole {
                             "6" -> arrayOf(arrayOf(matrixDeterminant(matrix)))
                             "7" -> {
                                 val invertedMatrix = matrixInversion(matrix)
-                                if (invertedMatrix.isEmpty()) throw NotInvertibleMatrixException()
-                                else invertedMatrix
+                                if (invertedMatrix.isEmpty()) {
+                                    println("\nMatrix is not invertible\n")
+                                    continue@mainMenu
+                                } else invertedMatrix
                             }
                             else -> throw Exception("Something went wrong")
                         }
@@ -99,8 +101,6 @@ class ViewConsole {
                 println()
             } catch (e: IllegalArgumentException) {
                 println("\nIncorrect input, please try again\n")
-            } catch (e: NotInvertibleMatrixException) {
-                println("\nMatrix is not invertible\n")
             }
         }
     }
@@ -164,6 +164,4 @@ class ViewConsole {
             }
         }
     }
-
-    private class NotInvertibleMatrixException : Exception()
 }
