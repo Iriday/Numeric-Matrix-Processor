@@ -77,13 +77,15 @@ fun matrixScalarMultiplication(matrix: Array<Array<BigDecimal>>, scalar: BigDeci
 
 fun matrixTransMainDiagonal(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
     if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
-    val newMatrix = Array(matrix[0].size) { Array(matrix.size) { BigDecimal.ZERO } }
-    for (i in matrix.indices) {
-        for (j in matrix[i].indices) {
-            newMatrix[j][i] = matrix[i][j]
+    var i = -1
+    return Array(matrix[0].size) {
+        i++
+        var j = -1
+        Array(matrix.size) {
+            j++
+            matrix[j][i]
         }
     }
-    return newMatrix
 }
 
 fun matrixTransSideDiagonal(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
