@@ -103,15 +103,15 @@ fun matrixTransSideDiagonal(matrix: Array<Array<BigDecimal>>): Array<Array<BigDe
 
 fun matrixTransVerticalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
     if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
-    val cols = matrix[0].size
-    val newMatrix = Array(matrix.size) { Array(cols) { BigDecimal.ZERO } }
-
-    for (i in matrix.indices) {
-        for (j in matrix[i].indices) {
-            newMatrix[i][j] = matrix[i][cols - 1 - j]
+    var i = -1
+    return Array(matrix.size) {
+        i++
+        var j = matrix[0].size
+        Array(matrix[0].size) {
+            j--
+            matrix[i][j]
         }
     }
-    return newMatrix
 }
 
 fun matrixTransHorizontalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
