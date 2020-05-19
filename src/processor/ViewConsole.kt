@@ -30,24 +30,25 @@ class ViewConsole {
                 val result = when (option) {
                     "1", "2", "3" -> {
                         val result: Array<Array<BigDecimal>>
-                        try {
-                            print("Enter size of first matrix: ")
-                            val aSize = readMatrixSizeFromConsole()
-                            println("Enter first matrix:")
-                            val a = readMatrixFromConsole(aSize[0], aSize[1])
-                            print("Enter size of second matrix: ")
-                            val bSize = readMatrixSizeFromConsole()
-                            println("Enter second matrix:")
-                            val b = readMatrixFromConsole(bSize[0], bSize[1])
 
+                        print("Enter size of first matrix: ")
+                        val aSize = readMatrixSizeFromConsole()
+                        println("Enter first matrix:")
+                        val a = readMatrixFromConsole(aSize[0], aSize[1])
+                        print("Enter size of second matrix: ")
+                        val bSize = readMatrixSizeFromConsole()
+                        println("Enter second matrix:")
+                        val b = readMatrixFromConsole(bSize[0], bSize[1])
+
+                        try {
                             result = when (option) {
                                 "1" -> matrixAddition(a, b)
                                 "2" -> matrixSubtraction(a, b)
                                 "3" -> matrixMultiplication(a, b)
-                                else -> throw IllegalArgumentException("Something went wrong")
+                                else -> throw RuntimeException("Something went wrong")
                             }
-                        } catch (e: IncompatibleMatricesException) {
-                            println("\nError, incompatible matrices\n")
+                        } catch (e: IllegalArgumentException) {
+                            println("\nError. ${e.message}\n")
                             continue@mainMenu
                         }
                         result
@@ -65,7 +66,7 @@ class ViewConsole {
                             "2" -> matrixTransSideDiagonal(matrix)
                             "3" -> matrixTransVerticalLine(matrix)
                             "4" -> matrixTransHorizontalLine(matrix)
-                            else -> throw Exception("Something went wrong")
+                            else -> throw RuntimeException("Something went wrong")
                         }
                         result
                     }
@@ -87,7 +88,7 @@ class ViewConsole {
                                     continue@mainMenu
                                 } else invertedMatrix
                             }
-                            else -> throw Exception("Something went wrong")
+                            else -> throw RuntimeException("Something went wrong")
                         }
                     }
                     "0" -> break@mainMenu

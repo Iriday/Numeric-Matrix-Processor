@@ -44,17 +44,17 @@ fun isMatricesCompatibleForMultiplication(a: Array<Array<BigDecimal>>, b: Array<
 // matrix operations
 
 fun matrixAddition(a: Array<Array<BigDecimal>>, b: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
-    if (!isMatricesSizesEqual(a, b)) throw IncompatibleMatricesException()
+    if (!isMatricesSizesEqual(a, b)) throw  IllegalArgumentException("Incompatible matrices")
     return a.mapIndexed { i, arr -> arr.mapIndexed { j, value -> value + b[i][j] }.toTypedArray() }.toTypedArray()
 }
 
 fun matrixSubtraction(a: Array<Array<BigDecimal>>, b: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
-    if (!isMatricesSizesEqual(a, b)) throw IncompatibleMatricesException()
+    if (!isMatricesSizesEqual(a, b)) throw IllegalArgumentException("Incompatible matrices")
     return a.mapIndexed { i, arr -> arr.mapIndexed { j, value -> value - b[i][j] }.toTypedArray() }.toTypedArray()
 }
 
 fun matrixMultiplication(a: Array<Array<BigDecimal>>, b: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
-    if (!isMatricesCompatibleForMultiplication(a, b)) throw IncompatibleMatricesException()
+    if (!isMatricesCompatibleForMultiplication(a, b)) throw IllegalArgumentException("Incompatible matrices")
     val result = Array<Array<BigDecimal>>(a.size) { Array(b[0].size) { BigDecimal.ZERO } }
     var sumTemp = BigDecimal.ZERO
 
