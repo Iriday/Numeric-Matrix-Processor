@@ -24,7 +24,7 @@ fun formatMatrix(matrix: Array<Array<BigDecimal>>, scale: Int): Array<Array<Stri
     }.toTypedArray()
 }
 
-fun isMatrixCorrect(matrix: Array<Array<BigDecimal>>): Boolean {
+fun <T> isMatrixCorrect(matrix: Array<Array<T>>): Boolean {
     if (matrix.isEmpty() || matrix[0].isEmpty()) return false
     val rows = matrix[0].size
     matrix.forEach { if (it.size != rows) return false }
@@ -32,12 +32,14 @@ fun isMatrixCorrect(matrix: Array<Array<BigDecimal>>): Boolean {
 }
 
 fun isMatricesSizesEqual(a: Array<Array<BigDecimal>>, b: Array<Array<BigDecimal>>): Boolean {
-    if (!isMatrixCorrect(a) || !isMatrixCorrect(b)) throw IllegalArgumentException("Incorrect matrix")
+    throwIfMatrixIncorrect(a)
+    throwIfMatrixIncorrect(b)
     return a.size == b.size && a[0].size == b[0].size
 }
 
 fun isMatricesCompatibleForMultiplication(a: Array<Array<BigDecimal>>, b: Array<Array<BigDecimal>>): Boolean {
-    if (!isMatrixCorrect(a) || !isMatrixCorrect(b)) throw IllegalArgumentException("Incorrect matrix")
+    throwIfMatrixIncorrect(a)
+    throwIfMatrixIncorrect(b)
     return a[0].size == b.size
 }
 
@@ -71,12 +73,12 @@ fun matrixMultiplication(a: Array<Array<BigDecimal>>, b: Array<Array<BigDecimal>
 }
 
 fun matrixScalarMultiplication(matrix: Array<Array<BigDecimal>>, scalar: BigDecimal): Array<Array<BigDecimal>> {
-    if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
+    throwIfMatrixIncorrect(matrix)
     return matrix.map { row -> row.map { value -> value * scalar }.toTypedArray() }.toTypedArray()
 }
 
 fun matrixTransMainDiagonal(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
-    if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
+    throwIfMatrixIncorrect(matrix)
     var i = -1
     return Array(matrix[0].size) {
         i++
@@ -89,7 +91,7 @@ fun matrixTransMainDiagonal(matrix: Array<Array<BigDecimal>>): Array<Array<BigDe
 }
 
 fun matrixTransSideDiagonal(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
-    if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
+    throwIfMatrixIncorrect(matrix)
     var i = matrix[0].size
     return Array(matrix[0].size) {
         i--
@@ -102,7 +104,7 @@ fun matrixTransSideDiagonal(matrix: Array<Array<BigDecimal>>): Array<Array<BigDe
 }
 
 fun matrixTransVerticalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
-    if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
+    throwIfMatrixIncorrect(matrix)
     var i = -1
     return Array(matrix.size) {
         i++
@@ -115,7 +117,7 @@ fun matrixTransVerticalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDe
 }
 
 fun matrixTransHorizontalLine(matrix: Array<Array<BigDecimal>>): Array<Array<BigDecimal>> {
-    if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
+   throwIfMatrixIncorrect(matrix)
     var i = matrix.size
     return Array(matrix.size) {
         i--
@@ -198,4 +200,8 @@ private fun determinant(matrix: Array<Array<BigDecimal>>): BigDecimal {
         sum += matrixij * cofactor(determinant(subMatrix(matrix, i, j)), i, j)
     }
     return sum
+}
+
+private fun <T> throwIfMatrixIncorrect(matrix: Array<Array<T>>){
+    if (!isMatrixCorrect(matrix)) throw IllegalArgumentException("Incorrect matrix")
 }
